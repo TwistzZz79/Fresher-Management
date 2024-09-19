@@ -4,7 +4,9 @@ import com.SpringBootFullstack.dto.Response;
 import com.SpringBootFullstack.entity.Users;
 import com.SpringBootFullstack.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -54,15 +56,18 @@ public class UsersManagementService {
             var user = usersRepository.findByEmail(loginRequest.getEmail()).orElseThrow();
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
-            response.setStatusCode(200);
+            response.setStatusCode(HttpStatus.OK.value());
             response.setToken(jwt);
             response.setRole(user.getRole());
             response.setRefreshToken(refreshToken);
             response.setExpirationTime("24Hrs");
             response.setMessage("Successfully Logged In");
 
+        } catch (BadCredentialsException e) {
+            response.setStatusCode(HttpStatus.UNAUTHORIZED.value());
+            response.setMessage("Incorrect email or password");
         }catch (Exception e){
-            response.setStatusCode(500);
+            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.setMessage(e.getMessage());
         }
         return response;

@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import UserService from '../service/UserService';
 import { Link } from 'react-router-dom';
 
-
-
 function ProfilePage() {
-    const [profileInfo, setProfileInfo] = useState({});
+    const [profileInfo, setProfileInfo] = useState(null);  // Initialize with null
 
     useEffect(() => {
         fetchProfileInfo();
@@ -13,14 +11,20 @@ function ProfilePage() {
 
     const fetchProfileInfo = async () => {
         try {
-
-            const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+            const token = localStorage.getItem('token');  // Retrieve token
             const response = await UserService.getYourProfile(token);
-            setProfileInfo(response.ourUsers);
+            setProfileInfo(response.ourUsers);  // Make sure this matches the backend structure
+            console.log(response.ourUsers);  
+
         } catch (error) {
             console.error('Error fetching profile information:', error);
         }
     };
+
+    // Conditionally render only if profileInfo is loaded
+    if (!profileInfo) {
+        return <div>Loading...</div>;  // Or any loading spinner you prefer
+    }
 
     return (
         <div className="profile-page-container">
@@ -30,7 +34,9 @@ function ProfilePage() {
             <p>Email: {profileInfo.email}</p>
             <p>Role: {profileInfo.role}</p>
             {profileInfo.role === "ADMIN" && (
-                <button><Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link></button>
+                <button>
+                    <Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link>
+                </button>
             )}
         </div>
     );

@@ -26,9 +26,9 @@ class UserService{
     }
     static async getAllUsers(token){
         try{
-            const response = await axios.post(`${UserService.BASE_URL}/admin/get-all-users`,
+            const response = await axios.get(`${UserService.BASE_URL}/admin/get-all-users`, 
                 {
-                    headers:{Authorization:`Bearer${token}`}
+                    headers:{Authorization:`Bearer ${token}`}
                 }
             )
             return response.data;
@@ -39,9 +39,9 @@ class UserService{
 
     static async getYourProfile(token){
         try{
-            const response = await axios.get(`${UserService.BASE_URL}/adminuser/get-profile`,
+            const response = await axios.get(`${UserService.BASE_URL}/adminuser/get-profile`, 
                 {
-                    headers:{Authorization:`Bearer${token}`}
+                    headers:{Authorization:`Bearer ${token}`}
                 }
             )
             return response.data;
@@ -57,7 +57,7 @@ class UserService{
                     headers:{Authorization:`Bearer ${token}`}
                } 
             )
-            return respone.data;
+            return response.data;
         }catch(err){
             throw err;
         }
@@ -97,13 +97,13 @@ class UserService{
     }
 
     static isAdmin(){
-        const role =localStorage.getItem('role')
-        return role=="ADMIN"
+        const role = localStorage.getItem('role')
+        return role==="ADMIN"
     }
 
     static isUser(){
         const role=localStorage.getItem('role')
-        return role=="USER"
+        return role==="USER"
     }
 
     static adminOnly(){

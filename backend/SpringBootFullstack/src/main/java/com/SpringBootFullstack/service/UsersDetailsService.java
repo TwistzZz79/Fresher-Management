@@ -13,7 +13,7 @@ public class UsersDetailsService implements UserDetailsService {
     private UsersRepository usersRepository;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return usersRepository.findByUsername(email)
+        return usersRepository.findByEmail(email)
                 .map(user -> new org.springframework.security.core.userdetails.User(
                         user.getEmail(),
                         user.getPassword(),

@@ -47,11 +47,11 @@ function Register() {
       <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>City:</label>
+          <label>Username:</label>
           <input
             type="text"
             name="username"
-            value={formData.city}
+            value={formData.username}
             onChange={handleInputChange}
             placeholder="Enter your username"
             required

@@ -34,6 +34,11 @@ public class Users implements UserDetails {
     private String role;
 
     @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role));
     }
