@@ -33,7 +33,6 @@ public class UsersManagementService {
             users.setEmail(responseRequest.getEmail());
             users.setName(responseRequest.getName());
             users.setRole(responseRequest.getRole());
-            users.setUsername(responseRequest.getUsername());
             users.setPassword(passwordEncoder.encode(responseRequest.getPassword()));
             Users usersResponse = usersRepository.save(users);
             if(usersResponse.getId()>0){
@@ -132,6 +131,8 @@ public class UsersManagementService {
 
     public Response deleteUser(Integer userId) {
         Response reqRes = new Response();
+        System.out.println(userId);
+
         try {
             Optional<Users> userOptional = usersRepository.findById(Long.valueOf(userId));
             if (userOptional.isPresent()) {
@@ -158,7 +159,6 @@ public class UsersManagementService {
                 existingUser.setEmail(updatedUser.getEmail());
                 existingUser.setName(updatedUser.getName());
                 existingUser.setRole(updatedUser.getRole());
-                existingUser.setUsername(updatedUser.getUsername());
                 // Check if password is present in the request
                 if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
                     // Encode the password and update it

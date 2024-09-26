@@ -63,11 +63,12 @@ class UserService{
         }
         
     }
-    static async deleteUser(userId,userData,token){
+    static async deleteUser(userId,token){
         try{
-            const response = await axios.get(`${UserService.BASE_URL}/admin/update/${userId}`,userData,{
+            const response = await axios.delete(`${UserService.BASE_URL}/admin/delete/${userId}`, {
                 headers:{Authorization:`Bearer ${token}`}
             })
+            console.log(response);
             return response.data;
         }catch(err){
             throw err;

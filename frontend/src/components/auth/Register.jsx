@@ -46,17 +46,6 @@ function Register() {
     <div className="auth-container">
       <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-            placeholder="Enter your username"
-            required
-          />
-        </div>
   
         <div className="form-group">
           <label>Name:</label>

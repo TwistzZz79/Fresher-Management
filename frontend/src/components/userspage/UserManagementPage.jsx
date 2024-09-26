@@ -17,7 +17,7 @@ function UserManagementPage() {
       const token = localStorage.getItem('token'); // Retrieve the token from localStorage
       const response = await UserService.getAllUsers(token);
       //   console.log(response);
-      setUsers(response.ourUsersList); // Assuming the list of users is under the key 'ourUsersList'
+      setUsers(response.usersList); // Assuming the list of users is under the key 'UsersList'
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -30,7 +30,9 @@ function UserManagementPage() {
       const confirmDelete = window.confirm('Are you sure you want to delete this user?');
 
       const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+      console.log(token);
       if (confirmDelete) {
+        console.log("Vào đây");
         await UserService.deleteUser(userId, token);
         // After deleting the user, fetch the updated list of users
         fetchUsers();
@@ -54,9 +56,9 @@ function UserManagementPage() {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
+          {users.map((user, index) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
+              <td>{index + 1}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>

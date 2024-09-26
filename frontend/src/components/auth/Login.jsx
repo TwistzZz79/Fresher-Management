@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
 import axios from "axios";
 
-function Login() {
+function Login({handleLogin}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +20,7 @@ function Login() {
         localStorage.setItem("token", userData.token);
         localStorage.setItem("role", userData.role);
         navigate("/profile");
+        handleLogin(true)
       } else {
         setError(userData.message);
       }

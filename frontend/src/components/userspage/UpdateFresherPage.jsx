@@ -1,0 +1,121 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import FresherService from "../service/FresherService";
+
+function UpdateFresherPage(){
+const {id}=useParams();
+const navigate =useNavigate();
+const [fresher,setFresher] =useState({
+    name: "",
+    email: "",
+    programmingLanguage: "",
+    firstProject: "",
+    secondProject: "",
+    thirdProject: ""
+
+});
+
+useEffect(()=>{
+    const fetchFreshers =async()=>{
+        try{
+            const respone=await FresherService.getFresherById(id);
+            setFresher(respone);
+        }catch (error){
+          
+
+            console.error("Error fetching fresher: ",error);
+        }
+    };
+    fetchFreshers();
+},[id]);
+
+const handleChange = (e)=>{
+    const {name,value}=e.target;
+    setFresher((prevFresher)=>({
+        ...prevFresher,
+        [name]:value
+    }));
+};
+
+const handleSubmit= async (e)=>{
+    e.preventDefault();
+    try{
+        await FresherService.updateFresher(id,fresher);
+        navigate("/freshers");
+    } catch (error){
+        console.error("Error updating fresher: ",error);
+    }
+};
+
+
+return (
+    <div>
+      <h1>Update Fresher</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={fresher.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={fresher.email}
+            onChange={handleChange}
+            style={{ width: "160px" }}
+
+          />
+        </div>
+        <div>
+          <label>Programming Language:</label>
+          <input
+            type="text"
+            name="programmingLanguage"
+            value={fresher.programmingLanguage}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Project 1:</label>
+          <input
+            type="text"
+            name="firstProject"
+            value={fresher.firstProject}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Project 2:</label>
+          <input
+            type="text"
+            name="secondProject"
+            value={fresher.secondProject}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Project 3:</label>
+          <input
+            type="text"
+            name="thirdProject"
+            value={fresher.thirdProject}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">Update Fresher</button>
+      </form>
+    </div>
+  );
+
+
+
+
+}
+
+export default UpdateFresherPage;

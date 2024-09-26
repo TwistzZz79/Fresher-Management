@@ -22,7 +22,7 @@ function UpdateUser() {
     try {
       const token = localStorage.getItem('token');
       const response = await UserService.getUserById(userId, token); // Pass userId to getUserById
-      const { name, email, role, city } = response.ourUsers;
+      const { name, email, role, city } = response.users;
       setUserData({ name, email, role, city });
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -41,7 +41,7 @@ function UpdateUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+      const confirmDelete = window.confirm('Are you sure you want to update this user?');
       if (confirmDelete) {
         const token = localStorage.getItem('token');
         const res = await UserService.updateUser(userId, userData, token);
@@ -60,10 +60,6 @@ function UpdateUser() {
     <div className="auth-container">
       <h2>Update User</h2>
       <form onSubmit={handleSubmit}>
-      <div className="form-group">
-          <label>Username:</label>
-          <input type="text" name="username" value={userData.username} onChange={handleInputChange} />
-        </div>
         <div className="form-group">
           <label>Name:</label>
           <input type="text" name="name" value={userData.name} onChange={handleInputChange} />

@@ -7,14 +7,16 @@ function ProfilePage() {
 
     useEffect(() => {
         fetchProfileInfo();
+        console.log(profileInfo);
     }, []);
 
     const fetchProfileInfo = async () => {
         try {
             const token = localStorage.getItem('token');  // Retrieve token
             const response = await UserService.getYourProfile(token);
-            setProfileInfo(response.ourUsers);  // Make sure this matches the backend structure
-            console.log(response.ourUsers);  
+            console.log(response);
+            setProfileInfo(response.users);  // Make sure this matches the backend structure
+            console.log(response.users);  
 
         } catch (error) {
             console.error('Error fetching profile information:', error);
@@ -29,11 +31,10 @@ function ProfilePage() {
     return (
         <div className="profile-page-container">
             <h2>Profile Information</h2>
-            <p>Username: {profileInfo.username}</p>
-            <p>Name: {profileInfo.name}</p>
-            <p>Email: {profileInfo.email}</p>
-            <p>Role: {profileInfo.role}</p>
-            {profileInfo.role === "ADMIN" && (
+            <p>Name: {profileInfo?.name}</p>
+            <p>Email: {profileInfo?.email}</p>
+            <p>Role: {profileInfo?.role}</p>
+            {profileInfo?.role === "ADMIN" && (
                 <button>
                     <Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link>
                 </button>
