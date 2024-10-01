@@ -66,6 +66,8 @@ function FresherPage() {
             <th>Project 2</th>
             <th>Project 3</th>
             <th>Final</th>
+            <th>Center</th> 
+            <th>Projects</th> 
             {UserService.isAdmin() && <th>Actions</th>}
           </tr>
         </thead>
@@ -86,6 +88,15 @@ function FresherPage() {
                 <td>{fresher.secondProject}</td>
                 <td>{fresher.thirdProject}</td>
                 <td>{fresher.finalScore}</td>
+                <td>{fresher.center ? fresher.center.name : "No Center"}</td>
+                <td>
+                  {fresher.projects && fresher.projects.length > 0
+                    ? fresher.projects.map((project) => project.name).join(", ")
+                    : "No Projects"}
+                </td>
+
+
+
                 {UserService?.isAdmin() && (
                   <td>
                     <button onClick={() => handleDelete(fresher.id)}>

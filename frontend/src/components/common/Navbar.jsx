@@ -23,6 +23,7 @@ function Navbar({isLoggedIn, onLogout}) {
                 {isAdmin && <li><Link to="/admin/user-management">User Management</Link></li>}
                 {isLoggedIn && <li><Link to="/freshers">Fresher Management</Link></li>} 
                 {isLoggedIn && <li><Link to="/centers">Centers</Link></li>} 
+                {isLoggedIn && <li><Link to="/projects">Projects</Link></li>} 
                 {isLoggedIn && <li><Link to="/" onClick={handleLogout}>Logout</Link></li>}
             </ul>
         </nav>

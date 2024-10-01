@@ -1,4 +1,4 @@
-package com.SpringBootFullstack.service;
+package com.SpringBootFullstack.service.impl;
 
 import com.SpringBootFullstack.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

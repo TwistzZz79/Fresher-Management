@@ -1,4 +1,4 @@
-package com.SpringBootFullstack.service;
+package com.SpringBootFullstack.service.impl;
 
 import com.SpringBootFullstack.entity.Center;
 import com.SpringBootFullstack.entity.Fresher;
@@ -42,6 +42,13 @@ public class CenterService {
     public void deleteCenter(Long id){
         Center center = centerRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Center not found with id "+ id));
+        List<Fresher> freshers = fresherRepository.findByCenter(center);
+
+        for(Fresher fresher :freshers){
+            fresher.setCenter(null);
+            fresherRepository.save(fresher);
+        }
+
         centerRepository.delete(center);
     }
 

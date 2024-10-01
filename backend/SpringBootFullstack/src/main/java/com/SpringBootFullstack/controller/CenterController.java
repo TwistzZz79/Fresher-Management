@@ -2,9 +2,7 @@ package com.SpringBootFullstack.controller;
 
 import com.SpringBootFullstack.entity.Center;
 import com.SpringBootFullstack.entity.Fresher;
-import com.SpringBootFullstack.repository.CenterRepository;
-import com.SpringBootFullstack.repository.FresherRepository;
-import com.SpringBootFullstack.service.CenterService;
+import com.SpringBootFullstack.service.impl.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

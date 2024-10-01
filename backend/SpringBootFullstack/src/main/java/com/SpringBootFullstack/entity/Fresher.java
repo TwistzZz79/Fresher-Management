@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,23 +28,35 @@ public class Fresher {
     private int secondProject;
     private int thirdProject;
     private double finalScore;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "center_id", nullable = true)
-    @JsonBackReference
+    @JsonBackReference(value = "center-fresher")
     private Center center;
-    @ManyToOne
-    @JoinColumn(name = "project_id", nullable = true)
-    private Project project;
+    @ManyToMany
+    //@JoinColumn(name = "projects_id", nullable = true)
+    @JoinTable(
+            name = "fresher_project",
+            joinColumns = @JoinColumn(name = "fresher_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    @JsonBackReference
+    private List<Project> projects;
 
     public double calculateFinalScore() {
-        return (firstProject + secondProject + thirdProject) / 3.0;
+        double averageScore = (firstProject + secondProject + thirdProject) / 3.0;
+        return roundScore(averageScore);
+    }
+
+    private Double roundScore(Double score){
+        BigDecimal bigDecimal= new BigDecimal(score).setScale(1, RoundingMode.HALF_UP);
+        return  bigDecimal.doubleValue();
     }
 
 
     @PrePersist
     @PreUpdate
     public void updateFinalScore(){
-        calculateFinalScore();
+        this.finalScore= calculateFinalScore();
     }
 
 

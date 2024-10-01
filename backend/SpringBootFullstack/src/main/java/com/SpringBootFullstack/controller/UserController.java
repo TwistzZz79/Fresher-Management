@@ -2,7 +2,7 @@ package com.SpringBootFullstack.controller;
 
 import com.SpringBootFullstack.dto.Response;
 import com.SpringBootFullstack.entity.Users;
-import com.SpringBootFullstack.service.UsersManagementService;
+import com.SpringBootFullstack.service.impl.UsersManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;

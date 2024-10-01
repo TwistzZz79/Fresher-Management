@@ -1,8 +1,9 @@
-package com.SpringBootFullstack.service;
+package com.SpringBootFullstack.service.impl;
 
 import com.SpringBootFullstack.dto.Response;
 import com.SpringBootFullstack.entity.Users;
 import com.SpringBootFullstack.repository.UsersRepository;
+import com.SpringBootFullstack.service.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

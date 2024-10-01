@@ -1,7 +1,7 @@
 package com.SpringBootFullstack.config;
 
 import com.SpringBootFullstack.service.JWTUtils;
-import com.SpringBootFullstack.service.UsersDetailsService;
+import com.SpringBootFullstack.service.impl.UsersDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.security.Security;
 
 @Component
 public class JWTAuthFilter  extends OncePerRequestFilter {
