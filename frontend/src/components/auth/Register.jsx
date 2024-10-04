@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
+import { useTranslation } from "react-i18next";
+
 
 function Register() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -44,11 +47,11 @@ function Register() {
   
   return (
     <div className="auth-container">
-      <h2>Registration</h2>
+      <h2>{t("Registration")}</h2>
       <form onSubmit={handleSubmit}>
   
         <div className="form-group">
-          <label>Name:</label>
+          <label>{t("Name")}:</label>
           <input
             type="text"
             name="name"
@@ -58,7 +61,7 @@ function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Email:</label>
+          <label>{t("Email")}:</label>
           <input
             type="email"
             name="email"
@@ -68,7 +71,7 @@ function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Password:</label>
+          <label>{t("Password")}:</label>
           <input
             type="password"
             name="password"
@@ -78,7 +81,7 @@ function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Role:</label>
+          <label>{t("Role")}:</label>
           <input
             type="text"
             name="role"
@@ -88,7 +91,7 @@ function Register() {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">{t("Register")}</button>
       </form>
     </div>
   );

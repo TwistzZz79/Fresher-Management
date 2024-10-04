@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import projectService from '../service/ProjectService';
+import { useTranslation } from "react-i18next";
+
 
 
 
 const UpdateProjectPage = () => {
+  const { t } = useTranslation();
+
     const [project, setProject] = useState({
       projectName: '',
       projectCode: '',
@@ -80,9 +84,9 @@ const UpdateProjectPage = () => {
   
     return (
       <div>
-        <h1>Update Project</h1>
+        <h1>{t("Update Project")}</h1>
         <form onSubmit={handleSubmit}>
-          <label>Project Name:</label>
+          <label>{t("Project Name")}:</label>
           <input
             type="text"
             name="projectName"
@@ -91,7 +95,7 @@ const UpdateProjectPage = () => {
             required
           />
           <br />
-          <label>Project Code:</label>
+          <label>{t("Project Code")}:</label>
           <input
             type="text"
             name="projectCode"
@@ -100,7 +104,7 @@ const UpdateProjectPage = () => {
             required
           />
           <br />
-          <label>Start Date:</label>
+          <label>{t("Start Date")}:</label>
           <input
             type="date"
             name="startDate"
@@ -109,7 +113,7 @@ const UpdateProjectPage = () => {
             required
           />
           <br />
-          <label>End Date:</label>
+          <label>{t("End Date")}:</label>
           <input
             type="date"
             name="endDate"
@@ -118,22 +122,22 @@ const UpdateProjectPage = () => {
             required
           />
           <br />
-          <label>Status:</label>
+          <label>{t("Status")}:</label>
           <select
             name="status"
             value={project.status}
             onChange={handleChange}
             required
           >
-            <option value="NOT_STARTED">Not Started</option>
-            <option value="ONGOING">Ongoing</option>
-            <option value="CANCELLED">Cancelled</option>
-            <option value="CLOSED">Closed</option>
+            <option value="NOT_STARTED">{t("Not Started")}</option>
+            <option value="ONGOING">{t("Ongoing")}</option>
+            <option value="CANCELLED">{t("Cancelled")}</option>
+            <option value="CLOSED">{t("Closed")}</option>
           </select>
           <br />
-          <label>Programming Languages:</label>
+          <label>{t("Programming Languages")}:</label>
           <select onChange={handleLanguageChange}>
-            <option value="">Select a programming language</option>
+            <option value="">{t("Select a programming language")}</option>
             {availableLanguages.map((language) => (
               <option key={language} value={language}>
                 {language}
@@ -148,7 +152,7 @@ const UpdateProjectPage = () => {
             ))}
           </ul>
           <br />
-          <button type="submit">Update</button>
+          <button type="submit">{t("Update")}</button>
         </form>
       </div>
     );

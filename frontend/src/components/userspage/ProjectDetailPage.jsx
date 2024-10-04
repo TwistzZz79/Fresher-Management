@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import ProjectService from "../service/ProjectService";
 import FresherService from "../service/FresherService";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next"; 
 
 function ProjectDetailPage() {
     const { id: projectId } = useParams(); // Destructure to get the projectId
     // console.log(projectId);
+
+    const { t } = useTranslation(); 
   const [project, setProject] = useState({});
   const [freshersInProject, setFreshersInProject] = useState([]);
   const [allFreshers, setAllFreshers] = useState([]);
@@ -93,37 +96,37 @@ function ProjectDetailPage() {
 };
 
 
-  return (
-    <div>
-      <h1>{project?.name} - Project Management</h1>
-      <h2>Freshers in this Project:</h2>
+return (
+  <div>
+      <h1>{project?.name} - {t("Project Management")}</h1>
+      <h2>{t("Freshers in this Project")}:</h2>
 
       <ul>
-        {freshersInProject?.map((item, index) => (
-          <li key={index}>
-            {item?.name} ({item?.email})
-            <button onClick={() => handleRemoveFresher(item)}>Remove</button>
-          </li>
-        ))}
+          {freshersInProject?.map((item, index) => (
+              <li key={index}>
+                  {item?.name} ({item?.email})
+                  <button onClick={() => handleRemoveFresher(item)}>{t("Remove")}</button>
+              </li>
+          ))}
       </ul>
 
-      <h3>Add a Fresher to the Project</h3>
+      <h3>{t("Add a Fresher to the Project")}</h3>
       <select
-        value={selectedFresher}
-        onChange={(e) => setSelectedFresher(e.target.value)}
+          value={selectedFresher}
+          onChange={(e) => setSelectedFresher(e.target.value)}
       >
-        <option value="">Select Fresher</option>
-        {allFreshers?.map((item) => (
-          <option key={item?.id} value={item?.id}>
-            {item?.name} - {item?.email}
-          </option>
-        ))}
+          <option value="">{t("Select Fresher")}</option>
+          {allFreshers?.map((item) => (
+              <option key={item?.id} value={item?.id}>
+                  {item?.name} - {item?.email}
+              </option>
+          ))}
       </select>
-      <button onClick={handleAddFresher}>Add Fresher</button>
+      <button onClick={handleAddFresher}>{t("Add Fresher")}</button>
 
-      <button onClick={() => navigate("/projects")}>Back to Projects</button>
-    </div>
-  );
+      <button onClick={() => navigate("/projects")}>{t("Back to Projects")}</button>
+  </div>
+);
 }
 
 export default ProjectDetailPage;

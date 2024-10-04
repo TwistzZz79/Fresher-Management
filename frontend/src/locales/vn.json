@@ -1,0 +1,130 @@
+{
+    "addFresher": "Thêm Fresher",
+    "nameLabel": "Tên",
+    "emailLabel": "Email",
+    "programmingLanguageLabel": "Ngôn Ngữ Lập Trình",
+    "project1Label": "Điểm dự án 1",
+    "project2Label": "Điểm dự án 2",
+    "project3Label": "Điểm dự án 3",
+    "addFresherButton": "Thêm Fresher",
+    "changeLanguage": "Thay Đổi Ngôn Ngữ",
+    "fresherList": "Danh Sách Fresher",
+    "searchPlaceholder": "Nhập từ khóa (tên, email, lập trình)",
+    "name": "Tên",
+    "email": "Email",
+    "programmingLanguage": "Ngôn Ngữ Lập Trình",
+    "project1": "Điểm dự án 1",
+    "project2": "Điểm dự án 2",
+    "project3": "Điểm dự án 3",
+    "final": "Điểm tổng kết",
+    "center": "Trung Tâm",
+    "projects": "Dự Án",
+    "actions": "Hành Động",
+    "noFreshersFound": "Không tìm thấy fresher nào.",
+    "noCenter": "Không Có Trung Tâm",
+    "noProjects": "Không Có Dự Án",
+    "delete": "Xóa",
+    "update": "Cập Nhật",
+    "confirmDelete": "Bạn có chắc chắn muốn xóa fresher này không?",
+    "page": "Trang",
+    "of": "của",
+    "previous": "Trước",
+    "next": "Tiếp Theo",    
+    "Centers": "Trung tâm",
+    "Add Center": "Thêm trung tâm",
+    "Center Name": "Tên trung tâm",
+    "Location": "Địa điểm",
+    "Actions": "Hành Động",
+    "Update": "Cập nhật",
+    "Delete": "Xóa",
+    "View Freshers": "Xem freshers",
+    "Are you sure you want to delete this center?": "Bạn có chắc chắn muốn xóa fresher này không?",
+
+    "Project List": "Danh sách dự án",
+    "Add Project": "Thêm dự án",
+    "Project Name": "Tên dự án",
+    "Project Code": "Mã dự án",
+    "Start Date": "Ngày bắt đầu",
+    "End Date": "Ngày kết thúc",
+    "Status": "Trạng thái",
+    "Programming Languages": "Ngôn Ngữ Lập Trình",
+    "Are you sure you want to delete this Project?": "Bạn có chắc chắn muốn xóa dự án này không?",
+    "View Details": "Xem chi tiết",
+
+
+    "Update Project": "Cập nhật Project",
+    "Not Started": "Chưa bắt đầu",
+    "Ongoing": "Đang làm",
+    "Cancelled": "Hủy",
+    "Closed": "Hoàn thành",
+    "Add custom programming language": "Thêm ngôn ngữ",
+    "Add": "Thêm",
+    "Selected Languages": "Chọn ngôn ngữ",
+    "Remove": "Bỏ",
+
+
+    "Update Center": "Cập nhật trung tâm",
+    "Name": "Tên",
+    "Center": "Trung tâm",
+
+    "Center Management": "Quản lý trung tâm",
+    "Freshers in this Center": "Freshers trong trung tâm",
+    "Add a Fresher to the Center": "Thêm Fresher vào trung tâm",
+    "Select Fresher": "Chọn fresher",
+    "Add Fresher": "Thêm Fresher",
+    "Back to Centers": "Quay về trung tâm",
+
+    "Loading...": "Loading...",
+    "Profile Information": "Thông tin cá nhân",
+    "Email": "Email",
+    "Role": "Vai trò",
+    "Update This Profile": "Cập nhật thông tin cá nhân",
+
+    "Project Management": "Quản lý dự án",
+    "Freshers in this Project": "Freshers trong dự án",
+    "Add a Fresher to the Project": "Thêm fresher vào dự án",
+    "Back to Projects": "Quay lại dự án",
+
+    "Add User": "Thêm người dùng",
+    "Error fetching Users":"Lỗi lấy người dùng",
+    "Are you sure you want to delete this user?":"Bạn có muốn xóa người dùng này không?",
+    "Error deleting user:":"Lỗi xóa người dùng",
+    "Users Management Page":"Trang quản lý người dùng",
+    "Error adding fresher: ": "Lỗi xóa người dùng",
+    
+    "Update Fresher": "Cập nhật Fresher",
+    "Programming Language":"Ngôn ngữ lập trình",
+    "Project 1":"Dự án 1",
+    "Project 2":"Dự án 2",
+    "Project 3":"Dự án 3",
+
+    "Are you sure you want to update this user?":"Bạn có muốn cập nhật người dùng này",
+    "Update User":"Cập nhật người dùng",
+    "Are you sure you want to logout this user?":"Bạn có muốn đăng xuất không?",
+    "User Management":"Quản lý người dùng",
+    "Fresher List":"Danh sách Fresher",
+    "Center List":"Danh sách Center",
+    "Logout":"Đăng xuất",
+    "Password":"Mật khẩu",
+    "Registration":"Đăng ký",
+    "Login":"Đăng nhập",
+    "Fresher Management":"Quản lý Fresher",
+
+    
+
+
+
+
+
+
+
+
+
+
+  
+    "language": {
+      "english": "Tiếng Anh",
+      "vietnamese": "Tiếng Việt"
+    }
+  }
+  

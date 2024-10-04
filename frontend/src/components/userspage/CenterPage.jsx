@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import CenterService from "../service/CenterService";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 function CenterPage() {
+  const {t}= useTranslation();
   const [centers, setCenters] = useState([]);
   const navigate = useNavigate();
 
@@ -61,14 +64,14 @@ function CenterPage() {
 
   return (
     <div>
-      <h1>Centers</h1>
-      <button onClick={() => navigate("/add-center")}>Add Center</button>
+      <h1>{t("Centers")}</h1>
+      <button onClick={() => navigate("/add-center")}>{t("Add Center")}</button>
       <table>
         <thead>
           <tr>
-            <th>Center Name</th>
-            <th>Location</th>
-            <th>Actions</th>
+            <th>{t("Center Name")}</th>
+            <th>{t("Location")}</th>
+            <th>{t("Actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -76,13 +79,17 @@ function CenterPage() {
             <tr key={center.id}>
               <td>{center.name}</td>
               <td>{center.location}</td>
-              <button onClick={() => navigate(`/update-center/${center.id}`)}>
-                Update
-              </button>
-              <button onClick={() => handleDelete(center.id)}>Delete</button>
-              <button onClick={() => navigate(`/center/${center.id}`)}>
-                View Freshers
-              </button>
+              <td>
+                <button onClick={() => navigate(`/update-center/${center.id}`)}>
+                  {t("Update")}
+                </button>
+                <button onClick={() => handleDelete(center.id)}>
+                  {t("Delete")}
+                </button>
+                <button onClick={() => navigate(`/center/${center.id}`)}>
+                  {t("View Freshers")}
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

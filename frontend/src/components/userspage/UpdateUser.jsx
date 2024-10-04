@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import UserService from '../service/UserService';
+import { useTranslation } from "react-i18next";
 
 function UpdateUser() {
+  const { t } = useTranslation();  
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -41,7 +43,7 @@ function UpdateUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const confirmDelete = window.confirm('Are you sure you want to update this user?');
+      const confirmDelete = window.confirm(t('Are you sure you want to update this user?'));
       if (confirmDelete) {
         const token = localStorage.getItem('token');
         const res = await UserService.updateUser(userId, userData, token);
@@ -58,10 +60,10 @@ function UpdateUser() {
 
   return (
     <div className="auth-container">
-      <h2>Update User</h2>
+      <h2>{t("Update User")}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Name:</label>
+          <label>{t("Name")}:</label>
           <input type="text" name="name" value={userData.name} onChange={handleInputChange} />
         </div>
         <div className="form-group">
@@ -69,10 +71,10 @@ function UpdateUser() {
           <input type="email" name="email" value={userData.email} onChange={handleInputChange} />
         </div>
         <div className="form-group">
-          <label>Role:</label>
+          <label>{t("Role")}:</label>
           <input type="text" name="role" value={userData.role} onChange={handleInputChange} />
         </div>
-        <button type="submit">Update</button>
+        <button type="submit">{t("Update")}</button>
       </form>
     </div>
   );

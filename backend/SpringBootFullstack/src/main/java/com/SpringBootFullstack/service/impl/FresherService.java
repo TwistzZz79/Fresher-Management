@@ -1,8 +1,11 @@
 package com.SpringBootFullstack.service.impl;
 
 import com.SpringBootFullstack.dto.FresherDTO;
+import com.SpringBootFullstack.dto.ProjectDTO;
 import com.SpringBootFullstack.entity.Fresher;
+import com.SpringBootFullstack.entity.Project;
 import com.SpringBootFullstack.repository.FresherRepository;
+import com.SpringBootFullstack.repository.ProjectRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,8 @@ public class FresherService {
     @Autowired
     private FresherRepository fresherRepository;
 
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -64,6 +69,7 @@ public class FresherService {
                 .orElseThrow(() -> new RuntimeException("No fresher found with this id"));
         fresherRepository.delete(fresher);
     }
+
 
 
 }

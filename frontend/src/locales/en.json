@@ -1,0 +1,101 @@
+{
+    "addFresher": "Add Fresher",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "programmingLanguageLabel": "Programming Language",
+    "project1Label": "Project 1",
+    "project2Label": "Project 2",
+    "project3Label": "Project 3",
+    "addFresherButton": "Add Fresher",
+    "changeLanguage": "Change Language",
+    "fresherList": "Fresher List",
+    "searchPlaceholder": "Enter keyword (name, email, programming)",
+    "name": "Name",
+    "email": "Email",
+    "programmingLanguage": "Programming Language",
+    "project1": "Project 1",
+    "project2": "Project 2",
+    "project3": "Project 3",
+    "final": "Final",
+    "center": "Center",
+    "projects": "Projects",
+    "actions": "Actions",
+    "noFreshersFound": "No freshers found.",
+    "noCenter": "No Center",
+    "noProjects": "No Projects",
+    "delete": "Delete",
+    "update": "Update",
+    "confirmDelete": "Are you sure you want to delete this fresher?",
+    "page": "Page",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next",
+    "Centers": "Centers",
+    "Add Center": "Add Center",
+    "Center Name": "Center Name",
+    "Location": "Location",
+    "Actions": "Actions",
+    "Update": "Update",
+    "Delete": "Delete",
+    "View Freshers": "View Freshers",
+    "Are you sure you want to delete this center?": "Are you sure you want to delete this center?",
+
+    "Project List": "Project List",
+    "Add Project": "Add Project",
+    "Project Name": "Project Name",
+    "Project Code": "Project Code",
+    "Start Date": "Start Date",
+    "End Date": "End Date",
+    "Status": "Status",
+    "Programming Languages": "Programming Languages",
+    "Are you sure you want to delete this Project?": "Are you sure you want to delete this Project?",
+    "View Details": "View Details",
+
+    
+
+    "Update Project": "Update Project",
+    "Not Started": "Not Started",
+    "Ongoing": "Ongoing",
+    "Cancelled": "Cancelled",
+    "Closed": "Closed",
+    "Add custom programming language": "Add custom programming language",
+    "Add": "Add",
+    "Selected Languages": "Selected Languages",
+    "Remove": "Remove",
+
+
+    "Update Center": "Update Center",
+    "Name": "Name",
+
+    "Center Management": "Center Management",
+    "Freshers in this Center": "Freshers in this Center",
+    "Add a Fresher to the Center": "Add a Fresher to the Center",
+    "Select Fresher": "Select Fresher",
+    "Add Fresher": "Add Fresher",
+    "Back to Centers": "Back to Centers",
+
+    "Loading...": "Loading...",
+    "Profile Information": "Profile Information",
+    "Email": "Email",
+    "Role": "Role",
+    "Update This Profile": "Update This Profile",
+
+    "Project Management": "Project Management",
+    "Freshers in this Project": "Freshers in this Project",
+    "Add a Fresher to the Project": "Add a Fresher to the Project",
+    "Back to Projects": "Back to Projects",
+  
+  
+  
+  
+  
+  
+    
+  
+  
+    "language": {
+      "english": "English",
+      "vietnamese": "Vietnamese"
+    }
+  }
+  

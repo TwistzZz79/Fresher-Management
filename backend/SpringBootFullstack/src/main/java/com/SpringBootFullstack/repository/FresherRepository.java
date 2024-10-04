@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -21,4 +22,21 @@ public interface FresherRepository extends JpaRepository<Fresher,Long>  {
     Page<Fresher> searchByKeyword(@Param("keyword")String keyword, Pageable pageable);
 
     List<Fresher> findByCenter(Center center);
+
+    Optional<Fresher> findByEmail (String email);
+
+
+    @Query("SELECT f.center.name, COUNT(f) FROM Fresher f GROUP BY f.center.name")
+    List<Object[]> getFreshersCountByCenter();
+
+    @Query("SELECT CASE WHEN f.finalScore >= 8 THEN 'Excellent' " +
+            "WHEN f.finalScore >= 6 THEN 'Good' " +
+            "ELSE 'Needs Improvement' END, COUNT(f) " +
+            "FROM Fresher f GROUP BY CASE " +
+            "WHEN f.finalScore >= 8 THEN 'Excellent' " +
+            "WHEN f.finalScore >= 6 THEN 'Good' " +
+            "ELSE 'Needs Improvement' END")
+    List<Object[]> getFreshersCountByFinalScore();
+
+
 }

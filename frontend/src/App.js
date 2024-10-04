@@ -19,6 +19,7 @@ import ProjectListPage from "./components/userspage/ProjectListPage";
 import AddProjectPage from "./components/userspage/AddProjectPage";
 import UpdateProjectPage from "./components/userspage/UpdateProjectPage";
 import ProjectDetailPage from "./components/userspage/ProjectDetailPage";
+import Dashboard from "./components/userspage/Dashboard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +46,9 @@ function App() {
             <Route path="/projects" element={<ProjectListPage />} /> {/* Changed from /api/projects */}
             <Route path="/projects/add" element={<AddProjectPage />} />
             <Route path="/projects/:id" element={<ProjectDetailPage />} /> {/* Correctly references ProjectDetailPage */}
+            <Route path="/dashboard" element={<Dashboard />} />
+
+
             {/* Check if user is authenticated and admin before rendering admin-only routes */}
             {UserService.adminOnly() && (
               <>

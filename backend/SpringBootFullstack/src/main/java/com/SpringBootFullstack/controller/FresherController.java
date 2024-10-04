@@ -1,6 +1,7 @@
 package com.SpringBootFullstack.controller;
 
 import com.SpringBootFullstack.dto.FresherDTO;
+import com.SpringBootFullstack.dto.ProjectDTO;
 import com.SpringBootFullstack.entity.Fresher;
 import com.SpringBootFullstack.service.impl.FresherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -70,4 +72,6 @@ public class FresherController {
         fresherService.deleteFresher(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 }

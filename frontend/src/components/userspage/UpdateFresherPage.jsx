@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FresherService from "../service/FresherService";
+import { useTranslation } from "react-i18next";
+
 
 function UpdateFresherPage(){
 const {id}=useParams();
 const navigate =useNavigate();
+const { t } = useTranslation();
 const [fresher,setFresher] =useState({
     name: "",
     email: "",
@@ -50,10 +53,10 @@ const handleSubmit= async (e)=>{
 
 return (
     <div>
-      <h1>Update Fresher</h1>
+      <h1>{t("Update Fresher")}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label>
+          <label>{t("Name")}:</label>
           <input
             type="text"
             name="name"
@@ -73,7 +76,7 @@ return (
           />
         </div>
         <div>
-          <label>Programming Language:</label>
+          <label>{t("Programming Language")}:</label>
           <input
             type="text"
             name="programmingLanguage"
@@ -82,7 +85,7 @@ return (
           />
         </div>
         <div>
-          <label>Project 1:</label>
+          <label>{t("Project 1")}:</label>
           <input
             type="text"
             name="firstProject"
@@ -91,7 +94,7 @@ return (
           />
         </div>
         <div>
-          <label>Project 2:</label>
+          <label>{t("Project 2")}:</label>
           <input
             type="text"
             name="secondProject"
@@ -100,7 +103,7 @@ return (
           />
         </div>
         <div>
-          <label>Project 3:</label>
+          <label>{t("Project 3")}:</label>
           <input
             type="text"
             name="thirdProject"
@@ -108,7 +111,7 @@ return (
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Update Fresher</button>
+        <button type="submit">{t("Update Fresher")}:</button>
       </form>
     </div>
   );

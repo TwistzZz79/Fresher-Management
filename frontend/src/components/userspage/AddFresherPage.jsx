@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FresherService from "../service/FresherService";
+import { useTranslation } from "react-i18next";
 
 function AddFresherPage() {
+  const { t, i18n } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [programmingLanguage, setProgrammingLanguage] = useState("");
@@ -10,7 +12,13 @@ function AddFresherPage() {
   const [secondProject, setSecondProject] = useState("");
   const [thirdProject, setThirdProject] = useState("");
   const [finalScore, setFinalScore] = useState("");
+  const [error, setError] = useState(null); // Error state
+
   const navigate = useNavigate();
+
+  const handleLanguageChange = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,16 +36,18 @@ function AddFresherPage() {
       await FresherService.addFresher(newFresher);
       navigate("/freshers"); // Navigate back to the fresher list page
     } catch (error) {
-      console.error("Error adding fresher: ", error);
+      console.error(t("Error adding fresher: "), error);
     }
   };
 
   return (
     <div>
-      <h1>Add Fresher</h1>
+      <h1>{t('addFresher')}</h1> {/* Use translation for the title */}
+      
+
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label>
+          <label>{t('nameLabel')}:</label>
           <input
             type="text"
             value={name}
@@ -46,18 +56,17 @@ function AddFresherPage() {
           />
         </div>
         <div>
-          <label>Email:</label>
+          <label>{t('emailLabel')}:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             style={{ width: "160px" }}
-
           />
         </div>
         <div>
-          <label>Programming Language:</label>
+          <label>{t('programmingLanguageLabel')}:</label>
           <input
             type="text"
             value={programmingLanguage}
@@ -66,7 +75,7 @@ function AddFresherPage() {
           />
         </div>
         <div>
-          <label>Project 1:</label>
+          <label>{t('project1Label')}:</label>
           <input
             type="text"
             value={firstProject}
@@ -75,7 +84,7 @@ function AddFresherPage() {
           />
         </div>
         <div>
-          <label>Project 2:</label>
+          <label>{t('project2Label')}:</label>
           <input
             type="text"
             value={secondProject}
@@ -84,7 +93,7 @@ function AddFresherPage() {
           />
         </div>
         <div>
-          <label>Project 3:</label>
+          <label>{t('project3Label')}:</label>
           <input
             type="text"
             value={thirdProject}
@@ -92,7 +101,7 @@ function AddFresherPage() {
             required
           />
         </div>
-        <button type="submit">Add Fresher</button>
+        <button type="submit">{t('addFresherButton')}</button> {/* Use translation for the button */}
       </form>
     </div>
   );

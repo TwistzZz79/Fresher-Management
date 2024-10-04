@@ -1,0 +1,44 @@
+.dashboard-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.statistics-section {
+    margin: 20px 0;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+.stats-table th,
+.stats-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.stats-table th {
+    background-color: #f2f2f2;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.grade-description {
+    font-size: 0.9em; 
+    color: #666; 
+    margin-left: 5px; 
+}

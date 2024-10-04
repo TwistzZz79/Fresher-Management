@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import CenterService from "../service/CenterService";
 import FresherService from "../service/FresherService";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 
 function CenterDetailPage() {
+  const { t } = useTranslation();
   const centerId = useParams();
   const [center, setCenter] = useState({});
   const [fresherInCenter, setFresherInCenter] = useState([]);
@@ -83,37 +86,36 @@ function CenterDetailPage() {
 
   return (
     <div>
-      <h1>{center.name} - Center Management</h1>
-      <h2>Freshers in this Center:</h2>
+      <h1>{center.name} - {t('Center Management')}</h1>
+      <h2>{t('Freshers in this Center')}:</h2>
 
       <ul>
-        {fresherInCenter.map((item, key) => (
+        {fresherInCenter.map((item) => (
           <li key={item.id}>
             {item.name} ({item.email})
             <button onClick={() => handleRemoveFresher(item)}>
-              Remove
+              {t('Remove')}
             </button>
           </li>
         ))}
       </ul>
 
-      <h3>Add a Fresher to the Center</h3>
-      
+      <h3>{t('Add a Fresher to the Center')}</h3>
 
       <select
         value={selectedFresher}
         onChange={(e) => setSelectedFresher(e.target.value)}
       >
-        <option value="">Select Fresher</option>
-        {fresherAll?.map((item, key) => (
+        <option value="">{t('Select Fresher')}</option>
+        {fresherAll?.map((item) => (
           <option key={item.id} value={item.id}>
             {item.name} - {item.email}
           </option>
         ))}
       </select>
-      <button onClick={handleAddFresher}>Add Fresher</button>
+      <button onClick={handleAddFresher}>{t('Add Fresher')}</button>
 
-      <button onClick={() => navigate("/centers")}>Back to Centers</button>
+      <button onClick={() => navigate("/centers")}>{t('Back to Centers')}</button>
     </div>
   );
 }

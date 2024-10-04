@@ -3,8 +3,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
+
 
 function Login({handleLogin}) {
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -35,7 +39,7 @@ function Login({handleLogin}) {
   
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <h2>{t("Login")}</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -47,10 +51,10 @@ function Login({handleLogin}) {
           ></input>
         </div>
         <div className="form-group">
-          <label>Password:</label>
+          <label>{t("Password")}:</label>
           <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">{t("Login")}</button>
       </form>
     </div>
   );

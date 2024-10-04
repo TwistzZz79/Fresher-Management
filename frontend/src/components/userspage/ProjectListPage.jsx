@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Replace useHistory with useNavigate
 import projectService from "../service/ProjectService";
+import { useTranslation } from "react-i18next";
+
 
 const ProjectListPage = () => {
+  const { t } = useTranslation();
+
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate(); // Replace useHistory with useNavigate
 
@@ -36,18 +40,19 @@ const ProjectListPage = () => {
 
   return (
     <div>
-      <h1>Project List</h1>
-      <button onClick={() => navigate("/projects/add")}>Add Project</button>
+      <h1>{t("Project List")}</h1>
+      <button onClick={() => navigate("/projects/add")}>{t("Add Project")}</button>
 
       <table>
         <thead>
           <tr>
-            <th>Project Name</th>
-            <th>Project Code</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
-            <th>Programming Languages</th>
+            <th>{t("Project Name")}</th>
+            <th>{t("Project Code")}</th>
+            <th>{t("Start Date")}</th>
+            <th>{t("End Date")}</th>
+            <th>{t("Status")}</th>
+            <th>{t("Programming Languages")}</th>
+            <th>{t("Actions")}</th> {/* Added Actions column header */}
           </tr>
         </thead>
         <tbody>
@@ -62,11 +67,10 @@ const ProjectListPage = () => {
                 {project.programmingLanguageList.join(", ")}{" "}
                 {/* Display languages */}
               </td>
-
               <td>
-              <button onClick={() => navigate(`/projects/update/${project.id}`)}>Update</button>
-              <button onClick={() => handleDelete(project.id)}>Delete</button>
-                <button onClick={() => navigate(`/projects/${project.id}`)}>View Details</button>
+                <button onClick={() => navigate(`/projects/update/${project.id}`)}>{t("Update")}</button>
+                <button onClick={() => handleDelete(project.id)}>{t("Delete")}</button>
+                <button onClick={() => navigate(`/projects/${project.id}`)}>{t("View Details")}</button>
               </td>
             </tr>
           ))}

@@ -1,10 +1,12 @@
 // components/UserManagementPage.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useTransition } from 'react';
 import { Link } from 'react-router-dom';
 import UserService from '../service/UserService';
+import {useTranslation} from 'react-i18next'
 
 function UserManagementPage() {
   const [users, setUsers] = useState([]);
+  const {t}=useTranslation();
 
   useEffect(() => {
     // Fetch users data when the component mounts
@@ -19,7 +21,7 @@ function UserManagementPage() {
       //   console.log(response);
       setUsers(response.usersList); // Assuming the list of users is under the key 'UsersList'
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error(t('Error fetching Users'), error);
     }
   };
 
@@ -27,7 +29,7 @@ function UserManagementPage() {
   const deleteUser = async (userId) => {
     try {
       // Prompt for confirmation before deleting the user
-      const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+      const confirmDelete = window.confirm(t('Are you sure you want to delete this user?'));
 
       const token = localStorage.getItem('token'); // Retrieve the token from localStorage
       console.log(token);
@@ -38,21 +40,21 @@ function UserManagementPage() {
         fetchUsers();
       }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error(t('Error deleting user:'), error);
     }
   };
 
   return (
     <div className="user-management-container">
-      <h2>Users Management Page</h2>
-      <button className='reg-button'> <Link to="/register">Add User</Link></button>
+      <h2>{t('Users Management Page')}</h2>
+      <button className='reg-button'> <Link to="/register">{t('Add User')}</Link></button>
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
+            <th>{t('ID')}</th>
+            <th>{t('Name')}</th>
+            <th>{t('Email')}</th>
+            <th>{t('Actions')}</th>
           </tr>
         </thead>
         <tbody>
@@ -62,9 +64,10 @@ function UserManagementPage() {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <button className='delete-button' onClick={() => deleteUser(user.id)}>Delete</button>
+                <button className='delete-button' onClick={() => deleteUser(user.id)}>{t('Delete')}</button>
                 <button><Link to={`/update-user/${user.id}`}>
-                  Update
+                {t('Update')}
+                  
                 </Link>
                 </button>
               </td>

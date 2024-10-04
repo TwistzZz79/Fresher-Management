@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../service/UserService';
 import { Link } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 function ProfilePage() {
+    const { t } = useTranslation(); 
     const [profileInfo, setProfileInfo] = useState(null);  // Initialize with null
 
     useEffect(() => {
@@ -30,13 +31,13 @@ function ProfilePage() {
 
     return (
         <div className="profile-page-container">
-            <h2>Profile Information</h2>
-            <p>Name: {profileInfo?.name}</p>
-            <p>Email: {profileInfo?.email}</p>
-            <p>Role: {profileInfo?.role}</p>
+            <h2>{t('Profile Information')}</h2>
+            <p>{t('Name')}: {profileInfo?.name}</p>
+            <p>{t('Email')}: {profileInfo?.email}</p>
+            <p>{t('Role')}: {profileInfo?.role}</p>
             {profileInfo?.role === "ADMIN" && (
                 <button>
-                    <Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link>
+                    <Link to={`/update-user/${profileInfo.id}`}>{t('Update This Profile')}</Link>
                 </button>
             )}
         </div>

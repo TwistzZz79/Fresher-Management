@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import FresherService from "../service/FresherService";
-
 import { useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
+import { useTranslation } from "react-i18next";
 
 function FresherPage() {
+  const { t } = useTranslation();
   const [freshers, setFreshers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(0);
@@ -31,9 +32,7 @@ function FresherPage() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this fresher?"
-    );
+    const confirmDelete = window.confirm(t("confirmDelete")); // Use translation for confirmation message
     if (confirmDelete) {
       try {
         await FresherService.deleteFresher(id);
@@ -46,36 +45,36 @@ function FresherPage() {
 
   return (
     <div>
-      <h1>Frehser List</h1>
+      <h1>{t("fresherList")}</h1>
       <input
         type="text"
-        placeholder="Enter keyword (name, email, programming)"
+        placeholder={t("searchPlaceholder")} // Use translation for placeholder
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-      ></input>
+      />
       {UserService.isAdmin() && (
-        <button onClick={() => navigate("/add-fresher")}>Add Fresher</button>
+        <button onClick={() => navigate("/add-fresher")}>{t("addFresher")}</button> // Use translation for button text
       )}
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Programming Language</th>
-            <th>Project 1</th>
-            <th>Project 2</th>
-            <th>Project 3</th>
-            <th>Final</th>
-            <th>Center</th> 
-            <th>Projects</th> 
-            {UserService.isAdmin() && <th>Actions</th>}
+            <th>{t("name")}</th>
+            <th>{t("email")}</th>
+            <th>{t("programmingLanguage")}</th>
+            <th>{t("project1")}</th>
+            <th>{t("project2")}</th>
+            <th>{t("project3")}</th>
+            <th>{t("final")}</th>
+            <th>{t("center")}</th> 
+            <th>{t("projects")}</th> 
+            {UserService.isAdmin() && <th>{t("actions")}</th>} {/* Use translation for actions header */}
           </tr>
         </thead>
         <tbody>
           {freshers?.length === 0 ? (
             <tr>
               <td colSpan={UserService.isAdmin() ? 8 : 7}>
-                No freshers found.
+                {t("noFreshersFound")} {/* Use translation for no freshers found message */}
               </td>
             </tr>
           ) : (
@@ -88,24 +87,22 @@ function FresherPage() {
                 <td>{fresher.secondProject}</td>
                 <td>{fresher.thirdProject}</td>
                 <td>{fresher.finalScore}</td>
-                <td>{fresher.center ? fresher.center.name : "No Center"}</td>
+                <td>{fresher.center ? fresher.center.name : t("noCenter")}</td> {/* Use translation for no center */}
                 <td>
                   {fresher.projects && fresher.projects.length > 0
                     ? fresher.projects.map((project) => project.name).join(", ")
-                    : "No Projects"}
+                    : t("noProjects")} {/* Use translation for no projects */}
                 </td>
-
-
 
                 {UserService?.isAdmin() && (
                   <td>
                     <button onClick={() => handleDelete(fresher.id)}>
-                      Delete
+                      {t("delete")} {/* Use translation for delete button text */}
                     </button>
                     <button
                       onClick={() => navigate(`/update-fresher/${fresher.id}`)}
                     >
-                      Update
+                      {t("update")} {/* Use translation for update button text */}
                     </button>
                   </td>
                 )}
@@ -115,17 +112,17 @@ function FresherPage() {
         </tbody>
       </table>
       <p>
-        Page {page + 1} of {totalPages}
+        {t("page")} {page + 1} {t("of")} {totalPages} {/* Use translation for pagination */}
       </p>
 
       <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-        Previous
+        {t("previous")} {/* Use translation for previous button text */}
       </button>
       <button
         onClick={() => setPage(page + 1)}
         disabled={page + 1 >= totalPages}
       >
-        Next
+        {t("next")} {/* Use translation for next button text */}
       </button>
     </div>
   );
