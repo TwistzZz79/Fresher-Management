@@ -91,7 +91,7 @@ function Register() {
             required
           />
         </div>
-        <button type="submit">{t("Register")}</button>
+        <button className="btn" type="submit">{t("Register")}</button>
       </form>
     </div>
   );

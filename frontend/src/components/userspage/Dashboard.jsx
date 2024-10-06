@@ -43,7 +43,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-container">
-            <h1>Dashboard</h1>
+            <h2>Dashboard</h2>
             {error && <div className="error">{error}</div>}
 
             <section className="statistics-section">

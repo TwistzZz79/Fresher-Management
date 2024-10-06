@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom"; // Replace useHistory with
 import projectService from "../service/ProjectService";
 import { useTranslation } from "react-i18next";
 
-
 const ProjectListPage = () => {
   const { t } = useTranslation();
 
@@ -39,9 +38,11 @@ const ProjectListPage = () => {
   };
 
   return (
-    <div>
-      <h1>{t("Project List")}</h1>
-      <button onClick={() => navigate("/projects/add")}>{t("Add Project")}</button>
+    <div className="form-listProject">
+      <h2>{t("Project List")}</h2>
+      <button className="btn" onClick={() => navigate("/projects/add")}>
+        {t("Add Project")}
+      </button>
 
       <table>
         <thead>
@@ -52,7 +53,7 @@ const ProjectListPage = () => {
             <th>{t("End Date")}</th>
             <th>{t("Status")}</th>
             <th>{t("Programming Languages")}</th>
-            <th>{t("Actions")}</th> {/* Added Actions column header */}
+            <th>{t("Actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -63,14 +64,26 @@ const ProjectListPage = () => {
               <td>{project.startDate}</td>
               <td>{project.endDate}</td>
               <td>{project.status}</td>
+              <td>{project.programmingLanguageList.join(", ")}</td>
               <td>
-                {project.programmingLanguageList.join(", ")}{" "}
-                {/* Display languages */}
-              </td>
-              <td>
-                <button onClick={() => navigate(`/projects/update/${project.id}`)}>{t("Update")}</button>
-                <button onClick={() => handleDelete(project.id)}>{t("Delete")}</button>
-                <button onClick={() => navigate(`/projects/${project.id}`)}>{t("View Details")}</button>
+                <button
+                  className="btn update-button"
+                  onClick={() => navigate(`/projects/update/${project.id}`)}
+                >
+                  {t("Update")}
+                </button>
+                <button
+                  className="btn delete-button"
+                  onClick={() => handleDelete(project.id)}
+                >
+                  {t("Delete")}
+                </button>
+                <button
+                  className="btn view-button"
+                  onClick={() => navigate(`/projects/${project.id}`)}
+                >
+                  {t("View Details")}
+                </button>
               </td>
             </tr>
           ))}

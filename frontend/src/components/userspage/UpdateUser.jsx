@@ -74,7 +74,7 @@ function UpdateUser() {
           <label>{t("Role")}:</label>
           <input type="text" name="role" value={userData.role} onChange={handleInputChange} />
         </div>
-        <button type="submit">{t("Update")}</button>
+        <button className="btn" type="submit">{t("Update")}</button>
       </form>
     </div>
   );

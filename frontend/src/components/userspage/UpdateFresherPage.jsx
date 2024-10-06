@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FresherService from "../service/FresherService";
 import { useTranslation } from "react-i18next";
-
+import { toast } from "react-toastify";
 
 function UpdateFresherPage(){
 const {id}=useParams();
@@ -44,6 +44,11 @@ const handleSubmit= async (e)=>{
     e.preventDefault();
     try{
         await FresherService.updateFresher(id,fresher);
+        toast.success("Update thành công", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "colored", 
+        });
         navigate("/freshers");
     } catch (error){
         console.error("Error updating fresher: ",error);
@@ -53,8 +58,8 @@ const handleSubmit= async (e)=>{
 
 return (
     <div>
-      <h1>{t("Update Fresher")}</h1>
-      <form onSubmit={handleSubmit}>
+      <h2>{t("Update Fresher")}</h2>
+      <form onSubmit={handleSubmit} className="form-update">
         <div>
           <label>{t("Name")}:</label>
           <input
@@ -111,7 +116,7 @@ return (
             onChange={handleChange}
           />
         </div>
-        <button type="submit">{t("Update Fresher")}:</button>
+        <button className="btn" type="submit">{t("Update Fresher")}</button>
       </form>
     </div>
   );

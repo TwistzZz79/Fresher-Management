@@ -41,10 +41,8 @@ function AddFresherPage() {
   };
 
   return (
-    <div>
-      <h1>{t('addFresher')}</h1> {/* Use translation for the title */}
-      
-
+    <div className="form-add-fresher">
+      <h2>{t('addFresher')}</h2> {/* Use translation for the title */}
       <form onSubmit={handleSubmit}>
         <div>
           <label>{t('nameLabel')}:</label>
@@ -101,7 +99,7 @@ function AddFresherPage() {
             required
           />
         </div>
-        <button type="submit">{t('addFresherButton')}</button> {/* Use translation for the button */}
+        <button className="btn" type="submit">{t('addFresherButton')}</button> {/* Use translation for the button */}
       </form>
     </div>
   );

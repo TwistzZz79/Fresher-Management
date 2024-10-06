@@ -20,9 +20,12 @@ import AddProjectPage from "./components/userspage/AddProjectPage";
 import UpdateProjectPage from "./components/userspage/UpdateProjectPage";
 import ProjectDetailPage from "./components/userspage/ProjectDetailPage";
 import Dashboard from "./components/userspage/Dashboard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -34,39 +37,67 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App h-screen">
         <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-        <div className="content">
+        <div className="content h-full">
           <Routes>
-            <Route exact path="/" element={<Login handleLogin={handleLogin} />} />
+            <Route
+              exact
+              path="/"
+              element={<Login handleLogin={handleLogin} />}
+            />
             <Route exact path="/login" element={<Login />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/freshers" element={<FresherPage />} />
             <Route path="/centers" element={<CenterPage />} />
-            <Route path="/projects" element={<ProjectListPage />} /> {/* Changed from /api/projects */}
+            <Route path="/projects" element={<ProjectListPage />} />{" "}
+            {/* Changed from /api/projects */}
             <Route path="/projects/add" element={<AddProjectPage />} />
-            <Route path="/projects/:id" element={<ProjectDetailPage />} /> {/* Correctly references ProjectDetailPage */}
+            <Route path="/projects/:id" element={<ProjectDetailPage />} />{" "}
+            {/* Correctly references ProjectDetailPage */}
             <Route path="/dashboard" element={<Dashboard />} />
-
-
             {/* Check if user is authenticated and admin before rendering admin-only routes */}
             {UserService.adminOnly() && (
               <>
                 <Route path="/register" element={<Register />} />
-                <Route path="/admin/user-management" element={<UserManagementPage />} />
+                <Route
+                  path="/admin/user-management"
+                  element={<UserManagementPage />}
+                />
                 <Route path="/update-user/:userId" element={<UpdateUser />} />
                 <Route path="/add-fresher" element={<AddFresherPage />} />
-                <Route path="/update-fresher/:id" element={<UpdateFresherPage />} />
+                <Route
+                  path="/update-fresher/:id"
+                  element={<UpdateFresherPage />}
+                />
                 <Route path="/add-center" element={<AddUpdateCenterPage />} />
-                <Route path="/update-center/:id" element={<AddUpdateCenterPage />} />
+                <Route
+                  path="/update-center/:id"
+                  element={<AddUpdateCenterPage />}
+                />
                 <Route path="/center/:id" element={<CenterDetailsPage />} />
-                <Route path="/projects/update/:id" element={<UpdateProjectPage />} />
+                <Route
+                  path="/projects/update/:id"
+                  element={<UpdateProjectPage />}
+                />
               </>
             )}
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </div>
         <FooterComponent />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </BrowserRouter>
   );

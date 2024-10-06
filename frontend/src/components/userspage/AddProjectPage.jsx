@@ -102,7 +102,7 @@ const AddProjectPage = () => {
 
   return (
     <div>
-      <h1>{id ? t('Update Project') : t('Add Project')}</h1>
+      <h2>{id ? t('Update Project') : t('Add Project')}</h2>
       <form onSubmit={handleSubmit}>
         <label>{t('Project Name')}:</label>
         <input
@@ -171,19 +171,19 @@ const AddProjectPage = () => {
             onChange={handleCustomLanguageChange}
             placeholder={t('Add custom programming language')}
           />
-          <button type="button" onClick={addCustomLanguage}>{t('Add')}</button>
+          <button className="btn" type="button" onClick={addCustomLanguage}>{t('Add')}</button>
         </div>
         <h4>{t('Selected Languages')}:</h4>
         <ul>
           {project.programmingLanguageList.map((language) => (
             <li key={language}>
               {language} 
-              <button type="button" onClick={() => removeCustomLanguage(language)}>{t('Remove')}</button>
+              <button className="btn" type="button" onClick={() => removeCustomLanguage(language)}>{t('Remove')}</button>
             </li>
           ))}
         </ul>
         <br />
-        <button type="submit">{id ? t('Update') : t('Add')}</button>
+        <button  className="btn"type="submit">{id ? t('Update') : t('Add')}</button>
       </form>
     </div>
   );

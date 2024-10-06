@@ -64,8 +64,8 @@ function CenterPage() {
 
   return (
     <div>
-      <h1>{t("Centers")}</h1>
-      <button onClick={() => navigate("/add-center")}>{t("Add Center")}</button>
+      <h2>{t("Centers")}</h2>
+      <button className="btn" onClick={() => navigate("/add-center")}>{t("Add Center")}</button>
       <table>
         <thead>
           <tr>
@@ -80,13 +80,13 @@ function CenterPage() {
               <td>{center.name}</td>
               <td>{center.location}</td>
               <td>
-                <button onClick={() => navigate(`/update-center/${center.id}`)}>
+                <button className="btn update-button" onClick={() => navigate(`/update-center/${center.id}`)}>
                   {t("Update")}
                 </button>
-                <button onClick={() => handleDelete(center.id)}>
+                <button className="btn delete-button" onClick={() => handleDelete(center.id)}>
                   {t("Delete")}
                 </button>
-                <button onClick={() => navigate(`/center/${center.id}`)}>
+                <button className="btn btn view-button" onClick={() => navigate(`/center/${center.id}`)}>
                   {t("View Freshers")}
                 </button>
               </td>

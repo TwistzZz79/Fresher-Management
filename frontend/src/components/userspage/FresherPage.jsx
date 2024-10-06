@@ -45,15 +45,18 @@ function FresherPage() {
 
   return (
     <div>
-      <h1>{t("fresherList")}</h1>
+      <h2>{t("fresherList")}</h2>
       <input
+        className="inputFresher"
         type="text"
         placeholder={t("searchPlaceholder")} // Use translation for placeholder
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       {UserService.isAdmin() && (
-        <button onClick={() => navigate("/add-fresher")}>{t("addFresher")}</button> // Use translation for button text
+        <button className="btn btn addFresher" onClick={() => navigate("/add-fresher")}>
+          {t("addFresher")}
+        </button> // Use translation for button text
       )}
       <table>
         <thead>
@@ -65,16 +68,18 @@ function FresherPage() {
             <th>{t("project2")}</th>
             <th>{t("project3")}</th>
             <th>{t("final")}</th>
-            <th>{t("center")}</th> 
-            <th>{t("projects")}</th> 
-            {UserService.isAdmin() && <th>{t("actions")}</th>} {/* Use translation for actions header */}
+            <th>{t("center")}</th>
+            <th>{t("projects")}</th>
+            {UserService.isAdmin() && <th>{t("actions")}</th>}{" "}
+            {/* Use translation for actions header */}
           </tr>
         </thead>
         <tbody>
           {freshers?.length === 0 ? (
             <tr>
               <td colSpan={UserService.isAdmin() ? 8 : 7}>
-                {t("noFreshersFound")} {/* Use translation for no freshers found message */}
+                {t("noFreshersFound")}{" "}
+                {/* Use translation for no freshers found message */}
               </td>
             </tr>
           ) : (
@@ -87,22 +92,31 @@ function FresherPage() {
                 <td>{fresher.secondProject}</td>
                 <td>{fresher.thirdProject}</td>
                 <td>{fresher.finalScore}</td>
-                <td>{fresher.center ? fresher.center.name : t("noCenter")}</td> {/* Use translation for no center */}
+                <td>
+                  {fresher.center ? fresher.center.name : t("noCenter")}
+                </td>{" "}
+                {/* Use translation for no center */}
                 <td>
                   {fresher.projects && fresher.projects.length > 0
                     ? fresher.projects.map((project) => project.name).join(", ")
-                    : t("noProjects")} {/* Use translation for no projects */}
+                    : t("noProjects")}{" "}
+                  {/* Use translation for no projects */}
                 </td>
-
                 {UserService?.isAdmin() && (
                   <td>
-                    <button onClick={() => handleDelete(fresher.id)}>
-                      {t("delete")} {/* Use translation for delete button text */}
+                    <button
+                      className="btn delete-button"
+                      onClick={() => handleDelete(fresher.id)}
+                    >
+                      {t("delete")}{" "}
+                      {/* Use translation for delete button text */}
                     </button>
                     <button
+                      className="btn"
                       onClick={() => navigate(`/update-fresher/${fresher.id}`)}
                     >
-                      {t("update")} {/* Use translation for update button text */}
+                      {t("update")}{" "}
+                      {/* Use translation for update button text */}
                     </button>
                   </td>
                 )}
@@ -112,18 +126,25 @@ function FresherPage() {
         </tbody>
       </table>
       <p>
-        {t("page")} {page + 1} {t("of")} {totalPages} {/* Use translation for pagination */}
+        {t("page")} {page + 1} {t("of")} {totalPages}{" "}
+        {/* Use translation for pagination */}
       </p>
-
-      <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-        {t("previous")} {/* Use translation for previous button text */}
-      </button>
-      <button
-        onClick={() => setPage(page + 1)}
-        disabled={page + 1 >= totalPages}
-      >
-        {t("next")} {/* Use translation for next button text */}
-      </button>
+      <div className="parent-btn-table">
+        <button
+          className="btn"
+          onClick={() => setPage(page - 1)}
+          disabled={page === 0}
+        >
+          {t("previous")} {/* Use translation for previous button text */}
+        </button>
+        <button
+          className="btn"
+          onClick={() => setPage(page + 1)}
+          disabled={page + 1 >= totalPages}
+        >
+          {t("next")} {/* Use translation for next button text */}
+        </button>
+      </div>
     </div>
   );
 }
