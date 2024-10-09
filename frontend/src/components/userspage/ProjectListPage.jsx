@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Replace useHistory with useNavigate
 import projectService from "../service/ProjectService";
 import { useTranslation } from "react-i18next";
+import UserService from "../service/UserService";
 
 const ProjectListPage = () => {
   const { t } = useTranslation();
@@ -17,7 +18,11 @@ const ProjectListPage = () => {
   const fetchProjects = async () => {
     try {
       const response = await projectService.getAllProjects();
-      setProjects(response);
+      if (Array.isArray(response)) {
+        setProjects(response);
+      } else {
+        console.error("Error: Response is not an array");
+      }
     } catch (error) {
       console.error("Error fetching projects: ", error);
     }
@@ -40,9 +45,11 @@ const ProjectListPage = () => {
   return (
     <div className="form-listProject">
       <h2>{t("Project List")}</h2>
-      <button className="btn" onClick={() => navigate("/projects/add")}>
-        {t("Add Project")}
-      </button>
+      {UserService.isAdmin() && (
+        <button className="btn" onClick={() => navigate("/projects/add")}>
+          {t("Add Project")}
+        </button>
+      )}
 
       <table>
         <thead>
@@ -53,7 +60,7 @@ const ProjectListPage = () => {
             <th>{t("End Date")}</th>
             <th>{t("Status")}</th>
             <th>{t("Programming Languages")}</th>
-            <th>{t("Actions")}</th>
+            {UserService.isAdmin() && <th>{t("Actions")}</th>}{" "}
           </tr>
         </thead>
         <tbody>
@@ -64,27 +71,33 @@ const ProjectListPage = () => {
               <td>{project.startDate}</td>
               <td>{project.endDate}</td>
               <td>{project.status}</td>
-              <td>{project.programmingLanguageList.join(", ")}</td>
               <td>
-                <button
-                  className="btn update-button"
-                  onClick={() => navigate(`/projects/update/${project.id}`)}
-                >
-                  {t("Update")}
-                </button>
-                <button
-                  className="btn delete-button"
-                  onClick={() => handleDelete(project.id)}
-                >
-                  {t("Delete")}
-                </button>
-                <button
-                  className="btn view-button"
-                  onClick={() => navigate(`/projects/${project.id}`)}
-                >
-                  {t("View Details")}
-                </button>
+                {Array.isArray(project.programmingLanguageList)
+                  ? project.programmingLanguageList.join(", ")
+                  : t("No programming languages")}
               </td>
+              {UserService.isAdmin() && (
+                <td>
+                  <button
+                    className="btn update-button"
+                    onClick={() => navigate(`/projects/update/${project.id}`)}
+                  >
+                    {t("Update")}
+                  </button>
+                  <button
+                    className="btn delete-button"
+                    onClick={() => handleDelete(project.id)}
+                  >
+                    {t("Delete")}
+                  </button>
+                  <button
+                    className="btn view-button"
+                    onClick={() => navigate(`/projects/${project.id}`)}
+                  >
+                    {t("View Details")}
+                  </button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

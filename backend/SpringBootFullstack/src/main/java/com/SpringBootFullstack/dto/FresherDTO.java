@@ -27,6 +27,6 @@ public class FresherDTO {
     private Long centerId;
     private Long projectId;
     //private Center center;
-    //private List<ProjectDTO> projects;
+    private List<ProjectDTO> projects;
 
 }

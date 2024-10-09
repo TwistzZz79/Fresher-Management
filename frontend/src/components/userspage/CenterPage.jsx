@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CenterService from "../service/CenterService";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import UserService from "../service/UserService";
 
 function CenterPage() {
   const {t}= useTranslation();
@@ -65,13 +66,15 @@ function CenterPage() {
   return (
     <div>
       <h2>{t("Centers")}</h2>
-      <button className="btn" onClick={() => navigate("/add-center")}>{t("Add Center")}</button>
+      {UserService.isAdmin()&&(
+        <button className="btn" onClick={() => navigate("/add-center")}>{t("Add Center")}</button>
+      )}
       <table>
         <thead>
           <tr>
             <th>{t("Center Name")}</th>
             <th>{t("Location")}</th>
-            <th>{t("Actions")}</th>
+            {UserService.isAdmin() && <th>{t("Actions")}</th>}{" "}
           </tr>
         </thead>
         <tbody>
@@ -79,17 +82,33 @@ function CenterPage() {
             <tr key={center.id}>
               <td>{center.name}</td>
               <td>{center.location}</td>
+
+
               <td>
-                <button className="btn update-button" onClick={() => navigate(`/update-center/${center.id}`)}>
-                  {t("Update")}
-                </button>
-                <button className="btn delete-button" onClick={() => handleDelete(center.id)}>
-                  {t("Delete")}
-                </button>
-                <button className="btn btn view-button" onClick={() => navigate(`/center/${center.id}`)}>
-                  {t("View Freshers")}
-                </button>
+                {UserService.isAdmin() && (
+                  <>
+                    <button
+                      className="btn update-button"
+                      onClick={() => navigate(`/update-center/${center.id}`)}
+                    >
+                      {t("Update")}
+                    </button>
+                    <button
+                      className="btn delete-button"
+                      onClick={() => handleDelete(center.id)}
+                    >
+                      {t("Delete")}
+                    </button>
+                    <button
+                      className="btn btn view-button"
+                      onClick={() => navigate(`/center/${center.id}`)}
+                    >
+                      {t("View Freshers")}
+                    </button>
+                  </>
+                )}
               </td>
+              
             </tr>
           ))}
         </tbody>

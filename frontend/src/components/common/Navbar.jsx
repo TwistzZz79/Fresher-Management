@@ -67,7 +67,8 @@ function Navbar({ isLoggedIn, onLogout }) {
         )}
 
         {isLoggedIn && <li onClick={handleLogout} style={{color: 'white'}}>{t("Logout")}</li>}
-        <div className="parent-language">
+        {isLoggedIn &&(
+          <div className="parent-language">
           <img
             src={englishFlag}
             alt="English Flag"
@@ -86,6 +87,9 @@ function Navbar({ isLoggedIn, onLogout }) {
             style={{ cursor: "pointer", width: "30px", height: "20px" }} // Adjust size as needed
           />
         </div>
+
+        )
+        }
       </ul>
     </nav>
   );

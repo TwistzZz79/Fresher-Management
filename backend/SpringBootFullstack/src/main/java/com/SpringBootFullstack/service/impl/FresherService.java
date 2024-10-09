@@ -4,6 +4,7 @@ import com.SpringBootFullstack.dto.FresherDTO;
 import com.SpringBootFullstack.dto.ProjectDTO;
 import com.SpringBootFullstack.entity.Fresher;
 import com.SpringBootFullstack.entity.Project;
+import com.SpringBootFullstack.exception.FresherNotFoundException;
 import com.SpringBootFullstack.repository.FresherRepository;
 import com.SpringBootFullstack.repository.ProjectRepository;
 import org.modelmapper.ModelMapper;
@@ -54,7 +55,7 @@ public class FresherService {
 
     public FresherDTO updateFresher(Long id, FresherDTO fresherDTO) {
         Fresher fresher = fresherRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No fresher found with this id"));
+                .orElseThrow(() -> new FresherNotFoundException("No fresher found with this id"));
 
         // Map DTO to entity and update fields
         modelMapper.map(fresherDTO, fresher);
@@ -66,7 +67,7 @@ public class FresherService {
 
     public void deleteFresher(Long id) {
         Fresher fresher = fresherRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No fresher found with this id"));
+                .orElseThrow(() -> new FresherNotFoundException("No fresher found with this id"));
         fresherRepository.delete(fresher);
     }
 

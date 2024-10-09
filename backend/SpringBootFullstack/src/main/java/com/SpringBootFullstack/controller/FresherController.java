@@ -73,5 +73,24 @@ public class FresherController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/{id}/projects")
+    public ResponseEntity<List<ProjectDTO>> getProjectHistory(@PathVariable Long id){
+        try{
+            FresherDTO fresher= fresherService.findById(id);
+
+            if(fresher==null){
+                return ResponseEntity.notFound().build();
+            }
+
+            List<ProjectDTO> projectHistory = fresher.getProjects();
+
+            return  ResponseEntity.ok(projectHistory);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+
+        }
+
+    }
+
 
 }

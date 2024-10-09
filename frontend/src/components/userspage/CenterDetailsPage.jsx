@@ -37,11 +37,25 @@ function CenterDetailPage() {
 
   const handleAddFresher = async () => {
     try {
+      // Check if the fresher is already in another center
+      const fresherToAdd = fresherAll.find((fresher) => fresher.id == selectedFresher);
+      if (!fresherToAdd) {
+        console.error("Fresher not found");
+        return;
+      }
+
+      // Assign fresher to the new center, automatically removing them from their previous center
       await CenterService.addFresherToCenter(centerId.id, selectedFresher);
+
+      // Update fresher lists: add to current center and remove from available freshers
+      setFresherInCenter((prev) => [...prev, fresherToAdd]);
       setFresherAll((prev) =>
         prev.filter((item) => item.id != selectedFresher)
       );
-      fetchAllFresherInCenter();
+      
+      // Reset the selected fresher after adding
+      setSelectedFresher("");
+
     } catch (error) {
       console.error("Error adding fresher to center: ", error);
     }
@@ -49,9 +63,15 @@ function CenterDetailPage() {
 
   const handleRemoveFresher = async (fresher) => {
     try {
+      // Remove fresher from the current center
       await CenterService.removeFresherFromCenter(centerId.id, fresher.id);
+
+      // Update fresher lists: remove from current center and add back to available freshers
+      setFresherInCenter((prev) =>
+        prev.filter((item) => item.id !== fresher.id)
+      );
       setFresherAll((prev) => [...prev, fresher]);
-      fetchAllFresherInCenter();
+
     } catch (error) {
       console.error("Error removing fresher from center: ", error);
     }

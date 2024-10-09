@@ -4,6 +4,8 @@ import com.SpringBootFullstack.dto.FresherDTO;
 import com.SpringBootFullstack.dto.ProjectDTO;
 import com.SpringBootFullstack.entity.Fresher;
 import com.SpringBootFullstack.entity.Project;
+import com.SpringBootFullstack.exception.FresherNotFoundException;
+import com.SpringBootFullstack.exception.ProjectNotFoundException;
 import com.SpringBootFullstack.repository.FresherRepository;
 import com.SpringBootFullstack.repository.ProjectRepository;
 import com.SpringBootFullstack.service.interfac.IProjectService;
@@ -42,7 +44,7 @@ public class ProjectService implements IProjectService {
     @Override
     public ProjectDTO getProjectById(Long id) {
         Project project =projectRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Project not found"));
+                .orElseThrow(()-> new ProjectNotFoundException("Project not found"));
         return  modelMapper.map(project,ProjectDTO.class);
     }
 
@@ -57,7 +59,7 @@ public class ProjectService implements IProjectService {
     @Override
     public ProjectDTO updateProject(Long id, ProjectDTO projectDTO) {
         Project project = projectRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Project not found"));
+                .orElseThrow(()-> new ProjectNotFoundException("Project not found"));
 
         project.setProjectCode(projectDTO.getProjectCode());
         project.setProjectName(projectDTO.getProjectName());
@@ -74,7 +76,7 @@ public class ProjectService implements IProjectService {
     @Override
     public void deleteProject(Long id) {
         Project project = projectRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Project not found"));
+                .orElseThrow(()-> new ProjectNotFoundException("Project not found"));
 
         for(Fresher fresher: project.getFresherList()){
             fresher.getProjects().remove(project);
@@ -89,14 +91,14 @@ public class ProjectService implements IProjectService {
     public void addFresherToProject(Long projectId, Long fresherId) {
 
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(()-> new RuntimeException("Project not found"));
+                .orElseThrow(()-> new ProjectNotFoundException("Project not found"));
 
         if(project.getFresherList()==null){
             project.setFresherList(new ArrayList<>());
         }
 
         Fresher fresher= fresherRepository.findById(fresherId)
-                .orElseThrow(()-> new RuntimeException("Fresher not found"));
+                .orElseThrow(()-> new FresherNotFoundException("Fresher not found"));
 
         if (!project.getFresherList().contains(fresher)) {
             project.getFresherList().add(fresher);
@@ -115,10 +117,10 @@ public class ProjectService implements IProjectService {
     @Override
     public void removeFresherFromProject(Long projectId, Long fresherId) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(()-> new RuntimeException("Project not found"));
+                .orElseThrow(()-> new ProjectNotFoundException("Project not found"));
 
         Fresher fresher= fresherRepository.findById(fresherId)
-                .orElseThrow(()-> new RuntimeException("Fresher not found"));
+                .orElseThrow(()-> new FresherNotFoundException("Fresher not found"));
 
         if (fresher.getProjects() != null) {
             fresher.getProjects().remove(project);
@@ -137,7 +139,7 @@ public class ProjectService implements IProjectService {
     @Override
     public List<ProjectDTO> getProjectsByFresherId(Long fresherId) {
         Fresher fresher= fresherRepository.findById(fresherId)
-                .orElseThrow(()-> new RuntimeException("Fresher not found"));
+                .orElseThrow(()-> new FresherNotFoundException("Fresher not found"));
 
         if (fresher.getProjects() != null && !fresher.getProjects().isEmpty()) {
             return fresher.getProjects().stream()
@@ -150,7 +152,7 @@ public class ProjectService implements IProjectService {
     @Override
     public List<FresherDTO> getFreshersByProject(Long projectId) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(()-> new RuntimeException("Project not found"));
+                .orElseThrow(()-> new ProjectNotFoundException("Project not found"));
 
 
 

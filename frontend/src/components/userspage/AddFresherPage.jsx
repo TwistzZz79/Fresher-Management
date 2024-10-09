@@ -60,7 +60,6 @@ function AddFresherPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: "160px" }}
           />
         </div>
         <div>

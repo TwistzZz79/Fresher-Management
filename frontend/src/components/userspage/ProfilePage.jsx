@@ -38,7 +38,7 @@ function ProfilePage() {
         {t("Email")}: <span className="infomation">{profileInfo?.email}</span>
       </p>
       <p className="title-infomation">
-        {t("Role")}: {profileInfo?.role} <span className="infomation">{profileInfo?.email}</span>
+        {t("Role")}: {profileInfo?.role} <span className="infomation"></span>
       </p>
       {profileInfo?.role === "ADMIN" && (
         <button className="btn">

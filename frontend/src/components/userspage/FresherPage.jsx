@@ -105,15 +105,15 @@ function FresherPage() {
                 {UserService?.isAdmin() && (
                   <td>
                     <button
-                      className="btn delete-button"
-                      onClick={() => handleDelete(fresher.id)}
+                    className="btn delete-button"
+                    onClick={() => handleDelete(fresher.id)}
                     >
                       {t("delete")}{" "}
                       {/* Use translation for delete button text */}
                     </button>
                     <button
-                      className="btn"
-                      onClick={() => navigate(`/update-fresher/${fresher.id}`)}
+                    className="btn update-button"
+                    onClick={() => navigate(`/update-fresher/${fresher.id}`)}
                     >
                       {t("update")}{" "}
                       {/* Use translation for update button text */}

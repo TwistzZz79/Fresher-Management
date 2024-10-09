@@ -2,10 +2,13 @@ package com.SpringBootFullstack.service.impl;
 
 import com.SpringBootFullstack.entity.Center;
 import com.SpringBootFullstack.entity.Fresher;
+import com.SpringBootFullstack.exception.CenterNotFoundException;
+import com.SpringBootFullstack.exception.FresherNotFoundException;
 import com.SpringBootFullstack.repository.CenterRepository;
 import com.SpringBootFullstack.repository.FresherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +36,7 @@ public class CenterService {
 
     public Center updateCenter(Long id, Center centerDetails){
         Center center=centerRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Center not found with id " + id));
+                .orElseThrow(()-> new CenterNotFoundException("Center not found with id " + id));
         center.setName(centerDetails.getName());
         center.setLocation(centerDetails.getLocation());
         return centerRepository.save(center);
@@ -41,8 +44,9 @@ public class CenterService {
 
     public void deleteCenter(Long id){
         Center center = centerRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Center not found with id "+ id));
+                .orElseThrow(()-> new CenterNotFoundException("Center not found with id "+ id));
         List<Fresher> freshers = fresherRepository.findByCenter(center);
+
 
         for(Fresher fresher :freshers){
             fresher.setCenter(null);
@@ -53,12 +57,13 @@ public class CenterService {
     }
 
 
+    @Transactional
     public Center addFresherToCenter(Long centerId, Long fresherId) {
         Center center = centerRepository.findById(centerId)
-                .orElseThrow(() -> new RuntimeException("Center not found"));
+                .orElseThrow(() -> new CenterNotFoundException("Center not found"));
 
         Fresher fresher = fresherRepository.findById(fresherId)
-                .orElseThrow(() -> new RuntimeException("Fresher not found"));
+                .orElseThrow(() -> new FresherNotFoundException("Fresher not found"));
 
         if(fresher.getCenter() !=null){
             Center oldCenter = fresher.getCenter();
@@ -73,19 +78,21 @@ public class CenterService {
         }
 
         fresherRepository.save(fresher); // Save the fresher with the new center
+        centerRepository.save(center);
 
         return centerRepository.findById(centerId)
-                .orElseThrow(() -> new RuntimeException("Center not found"));
+                .orElseThrow(() -> new CenterNotFoundException("Center not found"));
 
     }
 
     // Remove a fresher from a center
+    @Transactional
     public Center removeFresherFromCenter(Long centerId, Long fresherId) {
         Center center = centerRepository.findById(centerId)
-                .orElseThrow(() -> new RuntimeException("Center not found"));
+                .orElseThrow(() -> new CenterNotFoundException("Center not found"));
 
         Fresher fresher = fresherRepository.findById(fresherId)
-                .orElseThrow(() -> new RuntimeException("Fresher not found"));
+                .orElseThrow(() -> new FresherNotFoundException("Fresher not found"));
 
         if (fresher.getCenter().getId().equals(centerId)) {
             fresher.setCenter(null); // Remove the center from the fresher
@@ -99,7 +106,7 @@ public class CenterService {
 
     public List<Fresher> getFreshersByCenter(Long centerId){
         Center center = centerRepository.findById(centerId)
-                .orElseThrow(()-> new RuntimeException("Center not found with id"+ centerId));
+                .orElseThrow(()-> new CenterNotFoundException("Center not found with id"+ centerId));
 
         return fresherRepository.findByCenter(center);
 

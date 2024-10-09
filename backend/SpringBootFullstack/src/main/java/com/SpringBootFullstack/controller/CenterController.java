@@ -6,6 +6,7 @@ import com.SpringBootFullstack.service.impl.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,30 +31,32 @@ public class CenterController {
         return new ResponseEntity<>(center,HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Center>createCenter(@RequestBody Center center){
         Center newCenter = centerService.createCenter(center);
         return new ResponseEntity<>(newCenter,HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity <Center> updateCenter(@PathVariable Long id,@RequestBody Center centerDetails){
         Center updatedCenter= centerService.updateCenter(id,centerDetails);
         return new ResponseEntity<>(updatedCenter,HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus>deleteCenter(@PathVariable Long id){
         centerService.deleteCenter(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{centerId}/add-fresher/{fresherId}")
     public ResponseEntity<Center> addFresherToCenter(@PathVariable Long centerId,@PathVariable Long fresherId){
         Center center = centerService.addFresherToCenter(centerId,fresherId);
         return new ResponseEntity<>(center,HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{centerId}/remove-fresher/{fresherId}")
     public ResponseEntity<Center> removeFresherFromCenter(@PathVariable Long centerId,@PathVariable Long fresherId){
         Center center = centerService.removeFresherFromCenter(centerId,fresherId);
